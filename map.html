@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=3,maximum-scale=1,user-scalable=no,width=device-width">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="telephone=no" name="format-detection">		
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/base.css">
+		<link rel="stylesheet" type="text/css" href="css/index.css">
+		<link rel="stylesheet" type="text/css" href="css/layer.css">		
+	</head>
+	<script src="js/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=iTNLzUoeYG6twCPLNzfaZIe2"></script>
+	<body>
+		<div class="container">
+			<div class="page3">
+				<div id="map"></div>
+				<p class="reset"><img src="images/btn2.jpg"></p>
+				<p class="sure"><img src="images/btn3.jpg"></p>
+						<input type="text" id="suggestId" style="display: none;">
+						<!---放置地图数据------>
+				
+						<input type="text" id='zuobiao' style="display: none;">
+						<!---放置坐标数据------>
+			</div>
+		</div>
+
+	</body>
+</html>
+<script type="text/javascript"> 
+  // 百度地图API功能
+  var map = new BMap.Map("map");
+  var x,y = ''
+  	var ac = new BMap.Autocomplete( //建立一个自动完成的对象
+		{
+			"input": "suggestId"
+			,
+			"location": map
+		});		
+  map.centerAndZoom(new BMap.Point(114.3327430000,30.5888590000), 11);
+  var geolocationControl = new BMap.GeolocationControl();
+  geolocationControl.addEventListener("locationSuccess", function(e){
+    // 定位成功事件
+    var address = '';
+    address += e.addressComponent.province;
+    address += e.addressComponent.city;
+    address += e.addressComponent.district;
+    address += e.addressComponent.street;
+    address += e.addressComponent.streetNumber;
+    x=e.point.lng;
+    y=e.point.lat;
+    alert("当前定位地址为：" + address);
+    var point = new BMap.Point(x,y);
+    var marker = new BMap.Marker(point); // 创建标注
+	map.addOverlay(marker); // 将标注添加到地图中
+	marker.enableDragging(); //设置可拖拽
+	marker.addEventListener("dragend", function(e) { //拖动事件 
+		var pt = e.point;
+		var dizhi;
+		geoc.getLocation(pt, function(rs) {
+			var addComp = rs.addressComponents;
+			dizhi = addComp.city + addComp.district + addComp.street + addComp.streetNumber;
+			document.getElementById('suggestId').value = dizhi; //更新地址数据
+			var content = dizhi
+			var infoWindow = new BMap.InfoWindow("<p style='font-size:14px;'>" + content + "</p>");
+			marker.openInfoWindow(infoWindow, map.getCenter()); //将经纬度信息显示在提示框内
+		});
+	});
+  });
+  geolocationControl.addEventListener("locationError",function(e){
+    // 定位失败事件
+    alert(e.message);
+  });	
+  	map.addControl(geolocationControl);
+	var geoc = new BMap.Geocoder();
+	
+	$(function(){
+		$('.reset').click(function(){
+			window.location.reload();
+		})		
+	})
+
+</script> 

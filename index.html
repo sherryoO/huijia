@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=3,maximum-scale=1,user-scalable=no,width=device-width">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="telephone=no" name="format-detection">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+		<link rel="stylesheet" type="text/css" href="css/animate.css">
+		<link rel="stylesheet" type="text/css" href="css/base.css">
+		<link rel="stylesheet" type="text/css" href="css/index.css">
+		<link rel="stylesheet" type="text/css" href="css/layer.css">
+	</head>
+	<body>
+		<div class="container">
+			<div class="swiper-container">
+			    <div class="swiper-wrapper">		    	
+			        <div class="swiper-slide page1">
+			        	<div class="floatpage">
+			        		<div class="word1 ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="0.5s" swiper-animate-delay="0.2s">
+			        			<img src="images/img1_1.png" alt="">
+			        		</div>	
+			        		<div class="word2 ani" swiper-animate-effect="bounceIn" swiper-animate-duration="0.5s" swiper-animate-delay="1.2s">
+			        			<img src="images/img1_2.png" alt="">
+			        		</div>
+			        		<div class="word3 ani" swiper-animate-effect="bounceInRight" swiper-animate-duration="0.5s" swiper-animate-delay="2.0s">
+			        			<img src="images/img1_3.png" alt="">
+			        		</div>		
+			        		<div class="word4 ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="0.5s" swiper-animate-delay="2.8s">
+			        			<img src="images/img1_4.png" alt="">
+			        		</div>
+			        	</div>
+			        	<img src="images/arrow.png" alt="" class="arrow arrow-effect">
+			        </div>
+			        <div class="swiper-slide page2">
+			        	<div class="floatpage">
+			        		<div class="word1 ani" swiper-animate-effect="bounceIn" swiper-animate-duration="0.5s" swiper-animate-delay="0.2s">
+			        			<img src="images/img1_2.png" alt="">
+			        		</div>	
+			        		<div class="word2 ani" swiper-animate-effect="fadeInLeft" swiper-animate-duration="1s" swiper-animate-delay="1.2s">
+			        			<img src="images/img2_1.png" alt="">
+			        		</div>
+			        		<div class="word3 ani" swiper-animate-effect="fadeInLeft" swiper-animate-duration="1s" swiper-animate-delay="2.2s">
+			        			<img src="images/img2_2.png" alt="">
+			        		</div>		
+			        		<div class="word4 ani" swiper-animate-effect="fadeInLeft" swiper-animate-duration="1s" swiper-animate-delay="3.2s">
+			        			<img src="images/img2_3.png" alt="">
+			        		</div>
+			        		<div class="word5 ani" swiper-animate-effect="fadeInLeft" swiper-animate-duration="1s" swiper-animate-delay="4.2s">
+			        			<img src="images/img2_4.png" alt="">
+			        		</div>
+			        		<div class="word6 ani" swiper-animate-effect="fadeInLeft" swiper-animate-duration="1s" swiper-animate-delay="5.2s">
+			        			<img src="images/img2_5.png" alt="">
+			        		</div>
+			        		<div class="word7 ani" swiper-animate-effect="zoomInUp" swiper-animate-duration="1s" swiper-animate-delay="6s">
+			        			<img src="images/btn1.png" alt="">
+			        		</div>
+			        	</div>
+			        </div>
+			    </div>
+			</div>
+		</div>
+	  	<div id="music" class="play_yinfu">
+			<div class="music rotate"></div>			
+			<audio src="images/music.mp3" autoplay loop id="bgmusic"></audio>
+		</div>
+			
+		
+		
+		
+	<script src="js/jquery-1.10.1.min.js"></script>
+	<script src="js/swiper.min.js"></script>
+	<script src="js/swiper.animate.min.js"></script>
+	<script src="js/layer.js"></script>	
+	<script src="js/index.js"></script>
+	<script>
+		$(function(){
+			var swiper = new Swiper('.swiper-container', {
+			    direction : 'vertical',
+			    speed:500,
+			    preloadImages:true,
+			    /*paginationClickable: true,
+			    pagination: '.swiper-pagination',*/
+			    onInit: function(swiper){
+			        swiperAnimateCache(swiper); 
+			        swiperAnimate(swiper); 
+			    }, 
+			    onSlideChangeEnd: function(swiper){ 
+			        swiperAnimate(swiper);
+			    }		    
+			});	
+			$('.page2 .word7').click(function(){
+				location.href = 'map.html'
+			})
+		})
+	</script>
+	<script>
+	$(document).ready(function(){
+		$(".music").on("click",function(){
+			if ($(this).hasClass("rotate"))
+			{
+				$(this).removeClass("rotate");
+				$(this).parent().removeClass("play_yinfu");
+				document.getElementById("bgmusic").pause();
+
+			}
+			else
+			{
+				$(this).addClass("rotate");
+				$(this).parent().addClass("play_yinfu");
+				document.getElementById("bgmusic").play();
+			}
+		});
+	})
+	</script>	
+	</body>
+</html>
+<?php
+require_once "jssdk.php";
+$jssdk = new JSSDK("wx404d486ee788bda4", "e5519444c6ecb47bf3d572501a776587");
+$signPackage = $jssdk->GetSignPackage();
+?>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<!--<script type="text/javascript">
+	var title='倾城大作，耀世登场！';
+	var desc='猛戳↑一键解决你所有问题，功能强大就是任性！';
+	var link='http://house.iglzh.com/tianyH5/index.php';
+	var imgUrl='http://house.iglzh.com/tianyH5/images/share.jpg';		// 分享图标
+	wx.config({
+		debug: false,
+		url : '<?php echo $signPackage["url"];?>',
+		appId: '<?php echo $signPackage["appId"];?>',
+		timestamp: '<?php echo $signPackage["timestamp"];?>',
+		nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+		signature: '<?php echo $signPackage["signature"];?>',
+		jsApiList: [
+			// 所有要调用的 API 都要加到这个列表中
+			'onMenuShareAppMessage','onMenuShareTimeline','hideMenuItems'
+		]
+	});
+	wx.ready(function () {
+		document.getElementById('bgmusic').play();
+		// 在这里调用 API
+		wx.onMenuShareAppMessage({
+			title: title,
+			desc: desc,
+			link: link,
+			imgUrl: imgUrl,
+			trigger: function (res) {
+				//alert('用户点击发送给朋友');
+			},
+			success: function (res) {
+				//alert('已分享');
+				$('.chai').show()
+			},
+			cancel: function (res) {
+				//  alert('已取消');
+			},
+			fail: function (res) {
+				//  alert(JSON.stringify(res));
+			}
+		});
+		wx.onMenuShareTimeline({
+			title: title,
+			desc: desc,
+			link: link,
+			imgUrl: imgUrl,
+			trigger: function (res) {
+				// alert('用户点击分享到朋友圈');
+			},
+			success: function (res) {
+				//alert('已分享');
+				$('.chai').show()
+			},
+			cancel: function (res) {
+				// alert('已取消');
+			},
+			fail: function (res) {
+				// alert(JSON.stringify(res));
+			}
+		});
+	});
+</script>-->
