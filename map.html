@@ -31,6 +31,7 @@
 </html>
 <script type="text/javascript"> 
   // 百度地图API功能
+  var content = '';
   var map = new BMap.Map("map");
   var x,y = ''
   	var ac = new BMap.Autocomplete( //建立一个自动完成的对象
@@ -79,7 +80,15 @@
 	$(function(){
 		$('.reset').click(function(){
 			window.location.reload();
-		})		
+		});
+		$('.sure').click(function(){
+			if(content == ''){
+				alert(111)
+			}else{
+				alert(222)			
+			}
+
+	    });
 	})
 
 </script> 
